@@ -1,0 +1,9 @@
+docker cp "D:\Documents\Ashe\KongAuthPlugin\handler.lua" 32cf3544ce098dba9fcdaba42ce464e675174de0f242f02db04cd01a10231017:/usr/local/share/lua/5.1/kong/plugins/ashe-auth/handler.lua
+docker cp "D:\Documents\Ashe\KongAuthPlugin\schema.lua" 32cf3544ce098dba9fcdaba42ce464e675174de0f242f02db04cd01a10231017:/usr/local/share/lua/5.1/kong/plugins/ashe-auth/schema.lua
+docker cp "D:\Documents\Ashe\KongAuthPlugin\kong.conf" 32cf3544ce098dba9fcdaba42ce464e675174de0f242f02db04cd01a10231017:/etc/kong/kong.conf
+docker exec --user root 32cf3544ce098dba9fcdaba42ce464e675174de0f242f02db04cd01a10231017 kong rm /etc/kong/kong.conf.default
+docker exec --user root 32cf3544ce098dba9fcdaba42ce464e675174de0f242f02db04cd01a10231017 kong restart
+docker start 32cf3544ce098dba9fcdaba42ce464e675174de0f242f02db04cd01a10231017
+
+
+docker exec -it --user=root 32cf3544ce098dba9fcdaba42ce464e675174de0f242f02db04cd01a10231017 /bin/bash
