@@ -2,7 +2,7 @@ local typedefs = require "kong.db.schema.typedefs"
 
 
 return {
-  name = "asheauth",
+  name = "kong-asheauth",
   fields = {
     {
       route = typedefs.no_route,
