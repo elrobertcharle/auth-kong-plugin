@@ -1,10 +1,10 @@
-docker exec --user root 5464ca63c8cfcb8008f9d37827f11d19621ac7c19fca56bd68a73c04896347a8 mkdir /usr/local/share/lua/5.1/kong/plugins/ashe-auth
-docker cp "D:\Documents\Programming\kong-plugin\kong-jwt2header\plugin\handler.lua" 5464ca63c8cfcb8008f9d37827f11d19621ac7c19fca56bd68a73c04896347a8:/usr/local/share/lua/5.1/kong/plugins/ashe-auth/handler.lua
-docker cp "D:\Documents\Programming\kong-plugin\kong-jwt2header\plugin\schema.lua" 5464ca63c8cfcb8008f9d37827f11d19621ac7c19fca56bd68a73c04896347a8:/usr/local/share/lua/5.1/kong/plugins/ashe-auth/schema.lua
-docker cp "D:\Documents\Ashe\KongAuthPlugin\kong.conf" 5464ca63c8cfcb8008f9d37827f11d19621ac7c19fca56bd68a73c04896347a8:/etc/kong/kong.conf
-docker exec --user root 5464ca63c8cfcb8008f9d37827f11d19621ac7c19fca56bd68a73c04896347a8 rm /etc/kong/kong.conf.default
-docker exec --user root 5464ca63c8cfcb8008f9d37827f11d19621ac7c19fca56bd68a73c04896347a8 kong restart
-docker start 5464ca63c8cfcb8008f9d37827f11d19621ac7c19fca56bd68a73c04896347a8
+docker exec --user root dd5f33620ccaa7895fcfbc2bf2315b3d5cc32d573efae7f84007458966e537fa mkdir /usr/local/share/lua/5.1/kong/plugins/ashe-auth
+docker cp "D:\Documents\Ashe\KongAuthPlugin\plugin\handler.lua" dd5f33620ccaa7895fcfbc2bf2315b3d5cc32d573efae7f84007458966e537fa:/usr/local/share/lua/5.1/kong/plugins/ashe-auth/handler.lua
+docker cp "D:\Documents\Ashe\KongAuthPlugin\plugin\schema.lua" dd5f33620ccaa7895fcfbc2bf2315b3d5cc32d573efae7f84007458966e537fa:/usr/local/share/lua/5.1/kong/plugins/ashe-auth/schema.lua
+docker cp "D:\Documents\Ashe\KongAuthPlugin\kong.conf" dd5f33620ccaa7895fcfbc2bf2315b3d5cc32d573efae7f84007458966e537fa:/etc/kong/kong.conf
+docker exec --user root dd5f33620ccaa7895fcfbc2bf2315b3d5cc32d573efae7f84007458966e537fa rm /etc/kong/kong.conf.default
+docker exec --user root dd5f33620ccaa7895fcfbc2bf2315b3d5cc32d573efae7f84007458966e537fa kong restart
+docker start dd5f33620ccaa7895fcfbc2bf2315b3d5cc32d573efae7f84007458966e537fa
 
 
-docker exec -it --user=root 5464ca63c8cfcb8008f9d37827f11d19621ac7c19fca56bd68a73c04896347a8 /bin/bash
+docker exec -it --user=root dd5f33620ccaa7895fcfbc2bf2315b3d5cc32d573efae7f84007458966e537fa /bin/bash
