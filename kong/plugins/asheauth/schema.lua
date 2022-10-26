@@ -19,9 +19,9 @@ return {
     {
       config = {
         type = "record",
-        fields = {           
-            { uncontrolled_routes = { type = "array", required = false, elements = { type = "string" } }, },
-            { authorization_route = { type = "string", required = true}}
+        fields = {
+            { authorization_route = { type = "string", required = true}},         
+            { uncontrolled_routes = { type = "array", required = false, elements = { type = "string" } }, }            
         },
       },
     },
