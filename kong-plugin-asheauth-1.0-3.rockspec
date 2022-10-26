@@ -1,4 +1,4 @@
-package = "kong-asheauth"
+package = "asheauth"
 version = "1.0-3"
 
 source = {
@@ -17,7 +17,7 @@ dependencies = {
 build = {
   type = "builtin",
   modules = {
-    ["kong.plugins.kong-asheauth.handler"] = "plugin/handler.lua",
-    ["kong.plugins.kong-asheauth.schema"] = "plugin/schema.lua",
+    ["kong.plugins.asheauth.handler"] = "plugin/handler.lua",
+    ["kong.plugins.asheauth.schema"] = "plugin/schema.lua",
   }
 }
