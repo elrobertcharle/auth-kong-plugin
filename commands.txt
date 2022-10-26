@@ -8,3 +8,20 @@ docker start b231f5bdf98d1358481383635ad0ec9783ece68659559faafa6a07544675cb95
 
 
 docker exec -it --user=root b231f5bdf98d1358481383635ad0ec9783ece68659559faafa6a07544675cb95 /bin/bash
+
+
+//Via luarocks
+docker exec --user=root b231f5bdf98d1358481383635ad0ec9783ece68659559faafa6a07544675cb95 rm /del/kong-asheauth-1.0-3.all.rock
+docker exec --user=root b231f5bdf98d1358481383635ad0ec9783ece68659559faafa6a07544675cb95 rm /del/kong-asheauth-1.0-3.rockspec
+docker exec --user=root b231f5bdf98d1358481383635ad0ec9783ece68659559faafa6a07544675cb95 rm -r /del/plugin
+docker exec --user=root b231f5bdf98d1358481383635ad0ec9783ece68659559faafa6a07544675cb95 mkdir /del/plugin
+docker cp "D:\Documents\Ashe\KongAuthPlugin\plugin\handler.lua" b231f5bdf98d1358481383635ad0ec9783ece68659559faafa6a07544675cb95:/del/plugin/handler.lua
+docker cp "D:\Documents\Ashe\KongAuthPlugin\plugin\schema.lua" b231f5bdf98d1358481383635ad0ec9783ece68659559faafa6a07544675cb95:/del/plugin/schema.lua
+docker cp "D:\Documents\Ashe\KongAuthPlugin\kong-asheauth-1.0-3.rockspec" b231f5bdf98d1358481383635ad0ec9783ece68659559faafa6a07544675cb95:/del/kong-asheauth-1.0-3.rockspec
+docker exec  --user=root b231f5bdf98d1358481383635ad0ec9783ece68659559faafa6a07544675cb95 /bin/bash -c "cd /del && luarocks make"
+docker exec  --user=root b231f5bdf98d1358481383635ad0ec9783ece68659559faafa6a07544675cb95 /bin/bash -c "cd /del && luarocks pack kong-asheauth 1.0-3"
+docker exec  --user=root b231f5bdf98d1358481383635ad0ec9783ece68659559faafa6a07544675cb95 /bin/bash -c "cd /del && luarocks install kong-asheauth-1.0-3.all.rock"
+docker exec --user root b231f5bdf98d1358481383635ad0ec9783ece68659559faafa6a07544675cb95 rm /etc/kong/kong.conf.default
+docker cp "D:\Documents\Ashe\KongAuthPlugin\kong.conf" b231f5bdf98d1358481383635ad0ec9783ece68659559faafa6a07544675cb95:/etc/kong/kong.conf
+docker exec --user root b231f5bdf98d1358481383635ad0ec9783ece68659559faafa6a07544675cb95 kong restart
+docker start b231f5bdf98d1358481383635ad0ec9783ece68659559faafa6a07544675cb95
