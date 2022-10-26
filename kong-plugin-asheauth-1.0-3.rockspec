@@ -17,7 +17,7 @@ dependencies = {
 build = {
   type = "builtin",
   modules = {
-    ["kong.plugins.asheauth.handler"] = "plugin/handler.lua",
-    ["kong.plugins.asheauth.schema"] = "plugin/schema.lua",
+    ["kong.plugins.asheauth.handler"] = "kong/plugins/asheauth/handler.lua",
+    ["kong.plugins.asheauth.schema"] = "kong/plugins/asheauth/schema.lua",
   }
 }
