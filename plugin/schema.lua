@@ -2,7 +2,7 @@ local typedefs = require "kong.db.schema.typedefs"
 
 
 return {
-  name = "ashe-auth",
+  name = "jwt-to-header",
   fields = {
     {
       route = typedefs.no_route,
@@ -20,7 +20,7 @@ return {
       config = {
         type = "record",
         fields = {           
-            { uncontrolled_routes = { type = "array", required = true, elements = "string" }, },
+            { uncontrolled_routes = { type = "array", required = false, elements = { type = "string" } }, },
             { authorization_route = { type = "string", required = true}}
         },
       },
