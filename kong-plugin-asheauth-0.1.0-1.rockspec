@@ -1,38 +1,23 @@
-local plugin_name = "ashe-auth"
-local package_name = "kong-plugin-" .. plugin_name
-local package_version = "0.1.0"
-local rockspec_revision = "1"
+package = "kong-jwt2header"
+version = "1.0-3"
 
-local github_account_name = "elrobertcharle"
-local github_repo_name = "auth-kong-plugin"
-local git_checkout = package_version == "dev" and "master" or package_version
-
-
-package = package_name
-version = package_version .. "-" .. rockspec_revision
-supported_platforms = { "linux", "macosx" }
 source = {
-  url = "git+https://github.com/"..github_account_name.."/"..github_repo_name..".git",
-  tag = "mytag8",
+  url = "https://github.com/elrobertcharle/auth-kong-plugin.git"
 }
-
 
 description = {
-  summary = "Kong is a scalable and customizable API Management Layer built on top of Nginx.",
-  homepage = "https://"..github_account_name..".github.io/"..github_repo_name,
-  license = "Apache 2.0",
+  summary = "Ya tu sabes",
+  license = "MIT"
 }
-
 
 dependencies = {
+  "lua ~> 5.1"
 }
-
 
 build = {
   type = "builtin",
   modules = {
-    -- TODO: add any additional code files added to the plugin
-    ["kong.plugins."..plugin_name..".handler"] = "kong/plugins/"..plugin_name.."/handler.lua",
-    ["kong.plugins."..plugin_name..".schema"] = "kong/plugins/"..plugin_name.."/schema.lua",
+    ["kong.plugins.kong-jwt2header.handler"] = "plugin/handler.lua",
+    ["kong.plugins.kong-jwt2header.schema"] = "plugin/schema.lua",
   }
 }
