@@ -1,6 +1,6 @@
 local plugin_name = "ashe-auth"
 local package_name = "kong-plugin-" .. plugin_name
-local package_version = "0.1.0"
+local package_version = "0.7"
 local rockspec_revision = "1"
 
 local github_account_name = "elrobertcharle"
@@ -13,7 +13,7 @@ version = package_version .. "-" .. rockspec_revision
 supported_platforms = { "linux", "macosx" }
 source = {
   url = "git+https://github.com/"..github_account_name.."/"..github_repo_name..".git",
-  tag = mytag3,
+  tag = mytag4,
 }
 
 
