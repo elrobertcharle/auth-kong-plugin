@@ -1,16 +1,3 @@
-docker exec --user root b231f5bdf98d1358481383635ad0ec9783ece68659559faafa6a07544675cb95 mkdir /usr/local/share/lua/5.1/kong/plugins/ashe-auth
-docker cp "D:\Documents\Ashe\KongAuthPlugin\plugin\handler.lua" b231f5bdf98d1358481383635ad0ec9783ece68659559faafa6a07544675cb95:/usr/local/share/lua/5.1/kong/plugins/ashe-auth/handler.lua
-docker cp "D:\Documents\Ashe\KongAuthPlugin\plugin\schema.lua" b231f5bdf98d1358481383635ad0ec9783ece68659559faafa6a07544675cb95:/usr/local/share/lua/5.1/kong/plugins/ashe-auth/schema.lua
-docker cp "D:\Documents\Ashe\KongAuthPlugin\kong.conf" b231f5bdf98d1358481383635ad0ec9783ece68659559faafa6a07544675cb95:/etc/kong/kong.conf
-docker exec --user root b231f5bdf98d1358481383635ad0ec9783ece68659559faafa6a07544675cb95 rm /etc/kong/kong.conf.default
-docker exec --user root b231f5bdf98d1358481383635ad0ec9783ece68659559faafa6a07544675cb95 kong restart
-docker start b231f5bdf98d1358481383635ad0ec9783ece68659559faafa6a07544675cb95
-
-
-docker exec -it --user=root b231f5bdf98d1358481383635ad0ec9783ece68659559faafa6a07544675cb95 /bin/bash
-
-
-//Via luarocks
 $ContainerId = Read-Host -Prompt 'Input ContainerId'
 docker exec --user=root ${ContainerId} rm /del/kong-asheauth-1.0-3.all.rock
 docker exec --user=root ${ContainerId} rm /del/kong-asheauth-1.0-3.rockspec
