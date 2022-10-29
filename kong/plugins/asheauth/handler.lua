@@ -1,3 +1,5 @@
+local http = require "resty.http"
+
 local AsheauthHandler = {
   PRIORITY = 900,
   VERSION = "1.0"
@@ -9,8 +11,11 @@ end
 
 function AsheauthHandler:header_filter(conf)   
   kong.log.debug("response ok XXXX")   
-  kong.response.set_header("Add-By-My-Kong-Plugin", kong.router.get_route())
-end --]]
+
+  local httpc = http:new()
+
+  kong.response.set_header("ENTRO", "ok") 
+end
 
 
 
