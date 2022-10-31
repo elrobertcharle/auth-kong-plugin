@@ -18,16 +18,21 @@ function AsheauthHandler:rewrite(conf)
 
   local httpc = http:new()
 
-  local res, err = httpc:request_uri("https://www.microsoft.com/en-us", {
-    method = "GET"    
+  local res, err = httpc:request_uri("https://localhost:7075/api/test/foo", {
+    method = "GET",
   })
   
+  if err then
+    kong.log.debug("err: " .. err)
+  end
   if not res then
     kong.log.debug("res is nil")
     return
   else
-    local response_body = res:read_body()
-    kong.log.debug("status: " .. res.status .. "Body: " .. response_body)  
+    local status = res.status
+    local body   = res.body
+
+    kong.log.debug("read body status: " .. status .. " body: " .. body)
   end
 
   kong.log.debug("rewrite OK")   
