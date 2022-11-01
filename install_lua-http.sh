@@ -1,6 +1,7 @@
 #!/bin/bash
 #apt-get install <package name> -y
 apt-get update
+apt-get install vim -y
 apt-get install libssl-dev
 apt-get install zip -y
 apt-get install unzip -y

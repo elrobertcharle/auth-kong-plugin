@@ -1,37 +1,52 @@
-local http = require "resty.http"
-
 local AsheauthHandler = {
   PRIORITY = 900,
   VERSION = "1.0"
 }
 
 function AsheauthHandler:access(conf)
-  kong.log.debug("response ok XXXX")  
+   
 end
 
 function AsheauthHandler:header_filter(conf)   
-  kong.log.debug("response ok YYYY")     
+   
 end
 
 function AsheauthHandler:rewrite(conf)   
   kong.log.debug("enter rewrite")   
 
-  local httpc = http:new()
+  local httpc = require("resty.http").new()
 
-  local res, err = httpc:request_uri("https://localhost:7075/api/test/foo", {
-    method = "GET",
-  })
-  
-  if err then
-    kong.log.debug("err: " .. err)
+  local ok, err = httpc:connect({
+    scheme = "http",
+    host = "127.0.0.1",
+    port = 5075,
+    pool = "kongpool",
+    pool_size = 20
+    })
+  if ok then
+    kong.log.debug("connected ok")
+  else
+    kong.log.debug("connect err: " .. err)
+    return
   end
+
+  local res, err1 = httpc:request({
+    method = "GET",
+    path = "/api/test/foo",
+    headers = {
+      ["Host"] = "localhost:5075",
+    },
+  })
+
+  if err1 then
+    kong.log.debug("err: " .. err1)
+  end
+
   if not res then
     kong.log.debug("res is nil")
-    return
   else
+    local response_body = res:read_body()
     local status = res.status
-    local body   = res.body
-
     kong.log.debug("read body status: " .. status .. " body: " .. body)
   end
 
