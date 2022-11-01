@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #apt-get install <package name> -y
 apt-get update
 apt-get install libssl-dev
