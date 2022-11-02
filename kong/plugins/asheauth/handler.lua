@@ -1,4 +1,4 @@
-local httpc = require("resty.http").new()
+local http = require "resty.http"
 
 local AsheauthHandler = {
   PRIORITY = 900,
@@ -20,6 +20,7 @@ local function reques_http()
 end
 
 local function resquest_resty_http(auth_url, st)
+  local httpc = http:new()
   local res, req_err = httpc:request_uri(auth_url, {
     method = "GET",
     ssl_verify = false,
