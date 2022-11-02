@@ -1,18 +1,5 @@
 Write-Host @"
-Execute these:
-apt-get update
-apt-get install libssl-dev
-yes |apt-get install zip
-yes | apt-get install unzip
-yes | apt-get install gcc
-apt-get install make
-yes | apt-get install build-essential
-luarocks install luaossl
-yes | apt-get install m4
-luarocks install cqueues
-luarocks install fifo
-luarocks install basexx
-luarocks install http
+Installing lua-resty-http
 "@
 
 $ContainerId = Read-Host -Prompt 'Input ContainerId'
