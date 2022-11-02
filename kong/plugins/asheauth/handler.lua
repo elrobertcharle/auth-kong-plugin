@@ -1,4 +1,4 @@
-local http = require("resty.http")
+local httpc = require("resty.http").new()
 
 local AsheauthHandler = {
   PRIORITY = 900,
@@ -6,7 +6,6 @@ local AsheauthHandler = {
 }
 
 local function reques_http()
-  local httpc = http:new()
   local request = require "http.request"
   local new_request= request.new_from_uri("http://172.22.48.1:5075/api/test/foo") 
   local res_headers, res_stream = new_request:go(100);
