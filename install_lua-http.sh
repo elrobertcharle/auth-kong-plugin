@@ -14,3 +14,4 @@ luarocks install cqueues
 luarocks install fifo
 luarocks install basexx
 luarocks install http
+luarocks install lua-resty-http
