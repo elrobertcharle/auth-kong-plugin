@@ -1,9 +1,12 @@
+local http = require("resty.http")
+
 local AsheauthHandler = {
   PRIORITY = 900,
   VERSION = "1.0"
 }
 
 local function reques_http()
+  local httpc = http:new()
   local request = require "http.request"
   local new_request= request.new_from_uri("http://172.22.48.1:5075/api/test/foo") 
   local res_headers, res_stream = new_request:go(100);
@@ -17,28 +20,11 @@ local function reques_http()
   kong.log.debug("body:" .. res_body)
 end
 
-local function resquest_resty_http(st)
-  local httpc = require("resty.http").new()
-
-  local ok, err = httpc:connect({
-    scheme = "http",
-    host = "172.22.48.1",
-    port = 5075,
-    })
-  if ok then
-    kong.log.debug("connected ok")
-  else
-    kong.log.debug("connect err: " .. err)
-    return 500
-  end
-
-  local res, req_err = httpc:request({
+local function resquest_resty_http(auth_url, st)
+  local res, req_err = httpc:request_uri(auth_url, {
     method = "GET",
-    path = "/api/auth/validate-st",
-    headers = {
-      ["Host"] = "172.22.48.1:5075",
-      ["st"] = st,
-    },
+    ssl_verify = false,
+    headers = {["st"] = st}
   })
 
   if req_err then
@@ -61,14 +47,27 @@ local function resquest_resty_http(st)
 end
 
 function AsheauthHandler:access(conf)
-  kong.log.debug("enter access")   
-  
-  local st = kong.request.get_headers()["st"]
+  kong.log.debug("enter access")
+  kong.log.debug("authorization_url: " .. conf.authorization_url)
+  kong.log.debug("uncontrolled_routes: " .. conf.uncontrolled_routes or "")   
+  local ck = require "resty.cookie"
+  if not ck then
+   kong.log.debug("resty.cookie is not installed")
+   return
+  end
+
+  local cookie = ck:new()
+  local st, cookie_err = cookie:get("st")
+  if cookie_err then
+   kong.log.debug("cookie err: " .. cookie_err)
+  end
+ 
+  --local st = kong.request.get_headers()["st"]
   if not st then
       kong.response.exit(401)
   end
 
- local status= resquest_resty_http(st)
+ local status= resquest_resty_http(conf.authorization_url, st)
  if status~=200 then
   kong.response.exit(status)
  end
