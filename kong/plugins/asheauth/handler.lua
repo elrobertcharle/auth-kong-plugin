@@ -67,7 +67,6 @@ local function resquest_resty_http2(st)
     method = "GET",
     path = "/api/auth/validate-st",
     headers = {
-      ["Host"] = "172.22.48.1:5075",
       ["st"] = st,
     },
   })
