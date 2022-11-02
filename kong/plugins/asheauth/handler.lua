@@ -49,7 +49,7 @@ end
 function AsheauthHandler:access(conf)
   kong.log.debug("enter access")
   kong.log.debug("authorization_url: " .. conf.authorization_url)
-  kong.log.debug("uncontrolled_routes: " .. conf.uncontrolled_routes or "")   
+  kong.log.debug("uncontrolled_routes: " .. (conf.uncontrolled_routes or ""))   
   local ck = require "resty.cookie"
   if not ck then
    kong.log.debug("resty.cookie is not installed")
