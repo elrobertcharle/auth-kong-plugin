@@ -20,8 +20,7 @@ return {
       config = {
         type = "record",
         fields = {
-            { authorization_url = { type = "string", required = true}},         
-            { uncontrolled_routes = { type = "array", required = false, elements = { type = "string" } }, }            
+            { authorization_url = { type = "string", required = true}},       
         },
       },
     },

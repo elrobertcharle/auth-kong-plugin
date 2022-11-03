@@ -38,7 +38,7 @@ function AsheauthHandler:access(conf)
   if service then
     local tags_count=table.getn(service.tags)
     for i=1, tags_count do
-      if service.tags[i]="not-require-authorization" then
+      if service.tags[i] == "not-require-authorization" then
         require_authorization=false
         break
       end
@@ -46,7 +46,7 @@ function AsheauthHandler:access(conf)
   end
 
 
-  kong.log.debug("require_authorization: " .. require_authorization)
+  kong.log.debug("require_authorization: " .. tostring(require_authorization))
   kong.log.debug("authorization_url: " .. conf.authorization_url)
 
   if require_authorization then
