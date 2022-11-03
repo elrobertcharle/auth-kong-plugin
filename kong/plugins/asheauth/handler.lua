@@ -42,7 +42,7 @@ function AsheauthHandler:access(conf)
         require_authorization=false
         break
       end
-    end 
+    end
   end
 
 
