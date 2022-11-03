@@ -33,32 +33,47 @@ end
 
 function AsheauthHandler:access(conf)
   kong.log.debug("enter access")
+  local require_authorization = true
+  local service = kong.router.get_service()
+  if service then
+    local tags_count=table.getn(service.tags)
+    for i=1, tags_count do
+      if service.tags[i]="not-require-authorization" then
+        require_authorization=false
+        break
+      end
+    end
+  end
+
+
+  kong.log.debug("require_authorization: " .. require_authorization)
   kong.log.debug("authorization_url: " .. conf.authorization_url)
-  kong.log.debug("uncontrolled_routes: " .. (conf.uncontrolled_routes or ""))   
-  local ck = require "resty.cookie"
-  if not ck then
-   kong.log.debug("resty.cookie is not installed")
-   return
-  end
 
-  local cookie = ck:new()
-  local st, cookie_err = cookie:get("st")
-  if cookie_err then
-   kong.log.debug("cookie err: " .. cookie_err)
+  if require_authorization then
+    local ck = require "resty.cookie"
+    if not ck then
+     kong.log.debug("resty.cookie is not installed")
+     kong.response.exit(500)
+    end
+  
+    local cookie = ck:new()
+    local st, cookie_err = cookie:get("st")
+    if cookie_err then
+     kong.log.debug("cookie err: " .. cookie_err)
+     kong.response.exit(500)
+    end
+   
+    if not st then
+      kong.response.exit(401)
+    else
+      kong.log.debug("st: " .. st)
+    end
+  
+   local status= resquest_resty_http(conf.authorization_url, st)
+   if status~=200 then
+    kong.response.exit(status)
+   end
   end
- 
-  --local st = kong.request.get_headers()["st"]
-  if not st then
-    kong.response.exit(401)
-  else
-    kong.log.debug("st: " .. st)
-  end
-
- local status= resquest_resty_http(conf.authorization_url, st)
- if status~=200 then
-  kong.response.exit(status)
- end
-  -- reques_http()
 
   kong.log.debug("access passed OK")    
 end
